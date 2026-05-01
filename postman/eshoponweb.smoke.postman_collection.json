@@ -1,0 +1,201 @@
+{
+  "info": {
+    "name": "eShopOnWeb Smoke Tests",
+    "description": "Basic smoke checks for Microsoft eShopOnWeb Web UI. These checks verify availability of key pages and do not replace full browser E2E tests.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Home page",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is expected for Home page', function () {",
+              "    pm.expect([200]).to.include(pm.response.code);",
+              "});",
+              "pm.test('Response time is less than 5000ms', function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{webBaseUrl}}/"
+      }
+    },
+    {
+      "name": "Catalog page with default filters",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is expected for Catalog page with default filters', function () {",
+              "    pm.expect([200]).to.include(pm.response.code);",
+              "});",
+              "pm.test('Response time is less than 5000ms', function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{webBaseUrl}}/?pageId=0"
+      }
+    },
+    {
+      "name": "Basket page",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is expected for Basket page', function () {",
+              "    pm.expect([200, 302]).to.include(pm.response.code);",
+              "});",
+              "pm.test('Response time is less than 5000ms', function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{webBaseUrl}}/Basket"
+      }
+    },
+    {
+      "name": "Login page",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is expected for Login page', function () {",
+              "    pm.expect([200]).to.include(pm.response.code);",
+              "});",
+              "pm.test('Response time is less than 5000ms', function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{webBaseUrl}}/Identity/Account/Login"
+      }
+    },
+    {
+      "name": "Register page",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is expected for Register page', function () {",
+              "    pm.expect([200]).to.include(pm.response.code);",
+              "});",
+              "pm.test('Response time is less than 5000ms', function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{webBaseUrl}}/Identity/Account/Register"
+      }
+    },
+    {
+      "name": "Checkout page availability",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is expected for Checkout page availability', function () {",
+              "    pm.expect([200, 302]).to.include(pm.response.code);",
+              "});",
+              "pm.test('Response time is less than 5000ms', function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{webBaseUrl}}/Basket/Checkout"
+      }
+    },
+    {
+      "name": "Admin page availability",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is expected for Admin page availability', function () {",
+              "    pm.expect([200, 302]).to.include(pm.response.code);",
+              "});",
+              "pm.test('Response time is less than 5000ms', function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{webBaseUrl}}/admin"
+      }
+    },
+    {
+      "name": "Not found handling",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is expected for Not found handling', function () {",
+              "    pm.expect([200, 302, 404]).to.include(pm.response.code);",
+              "});",
+              "pm.test('Response time is less than 5000ms', function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{webBaseUrl}}/this-page-should-not-exist"
+      }
+    }
+  ]
+}

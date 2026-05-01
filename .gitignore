@@ -1,0 +1,30 @@
+# Archives
+*.zip
+*.rar
+*.7z
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+.vs/
+
+# .NET build artifacts from the external tested project
+bin/
+obj/
+TestResults/
+coverage/
+*.trx
+
+# Environment files
+.env
+
+# Temporary files
+*.tmp
+*.temp
