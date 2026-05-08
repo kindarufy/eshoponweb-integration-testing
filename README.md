@@ -4,20 +4,6 @@
 
 В репозитории собраны тестовые артефакты, которые показывают подход к планированию, проведению и документированию интеграционного тестирования готового веб-приложения.
 
-## GitHub About
-
-Рекомендуемое описание для поля **About / Description** на GitHub:
-
-```text
-Integration testing case study for Microsoft eShopOnWeb: test plan, Big Bang strategy, E2E checklist, Postman smoke collection, findings register, and final report.
-```
-
-Рекомендуемые topics:
-
-```text
-testing, integration-testing, qa, postman, test-plan, checklist, dotnet, aspnetcore, eshoponweb, portfolio
-```
-
 ## Объект тестирования
 
 Объектом тестирования является внешний open-source проект:
