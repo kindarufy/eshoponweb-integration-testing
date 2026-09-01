@@ -1,42 +1,39 @@
 # eShopOnWeb Integration Testing
 
-Кейс по интеграционному тестированию учебного ASP.NET Core-приложения **Microsoft eShopOnWeb**.
+**eShopOnWeb Integration Testing** — portfolio case по интеграционному и E2E-тестированию open-source приложения **Microsoft eShopOnWeb**.
 
-В репозитории собраны тестовые артефакты, которые показывают подход к планированию, проведению и документированию интеграционного тестирования готового веб-приложения.
+Исходный код eShopOnWeb не копируется в этот репозиторий. Здесь находятся только мои тестовые артефакты: стратегия, test plan, test cases, Postman smoke collection, findings, отчёт и вспомогательные инструкции.
 
 ## Объект тестирования
 
-Объектом тестирования является внешний open-source проект:
+Microsoft eShopOnWeb — reference application на ASP.NET Core с каталогом, корзиной, оформлением заказа, Identity-аутентификацией, admin-интерфейсом и Public API.
+
+Оригинальный проект:
 
 ```text
-Microsoft eShopOnWeb
 https://github.com/dotnet-architecture/eShopOnWeb
 ```
 
-`eShopOnWeb` проект представляет собой ASP.NET Core reference application с веб-интерфейсом, каталогом товаров, корзиной, оформлением заказа, Identity-аутентификацией, административной частью и отдельным `PublicApi`, который используется admin-интерфейсом.
-
-Важно: исходный код eShopOnWeb **не входит** в этот репозиторий. Этот репозиторий содержит только мои тестовые материалы: тест-план, стратегию, чек-листы, Postman-коллекцию, реестр findings, отчёты и вспомогательные инструкции.
-
 ## Мой вклад
 
-В рамках проекта подготовлены:
+В рамках case study подготовлены:
 
-- тест-план интеграционного тестирования;
+- integration test plan;
 - стратегия Big Bang Integration Testing;
-- набор тест-кейсов для ручной проверки;
-- E2E-чек-лист основных пользовательских сценариев;
-- Postman-коллекция для базовой smoke-проверки;
-- реестр тестовых находок и рисков;
-- итоговый отчёт;
-- инструкции по запуску eShopOnWeb для тестирования;
-- скрипты-подсказки для запуска приложения;
+- ручные test cases;
+- E2E checklist ключевых пользовательских сценариев;
+- Postman smoke collection;
+- реестр findings и рисков;
+- security checklist;
+- итоговый test report;
+- инструкции по подготовке environment;
+- scripts-подсказки для запуска приложения;
 - CI-проверка структуры тестовых артефактов.
 
-## Структура репозитория
+## Структура
 
 ```text
 eshoponweb-integration-testing/
-├── README.md
 ├── docs/
 │   ├── environment.md
 │   ├── security-checklist.md
@@ -46,59 +43,51 @@ eshoponweb-integration-testing/
 ├── checklists/
 │   └── e2e-checklist.md
 ├── postman/
-│   ├── eshoponweb.local.postman_environment.json
-│   └── eshoponweb.smoke.postman_collection.json
 ├── reports/
 │   ├── anomalies.md
 │   ├── findings.csv
 │   ├── findings.md
 │   └── test-report.md
 ├── scripts/
-│   ├── run-eshoponweb.ps1
-│   └── run-eshoponweb.sh
 ├── tools/
 │   └── validate_artifacts.py
 ├── .github/workflows/ci.yml
-├── .editorconfig
-├── .gitignore
-└── LICENSE
+└── README.md
 ```
 
-## Подход к тестированию
+## Подход
 
-Для учебного кейса выбран подход **Big Bang Integration Testing**.
+Для учебного анализа используется **Big Bang Integration Testing**: приложение рассматривается как уже собранная система, а проверка строится вокруг сквозных сценариев.
 
-При таком подходе приложение рассматривается как уже собранная единая система, а тестирование выполняется через сквозные пользовательские сценарии:
+Покрываются:
 
-- открытие главной страницы;
-- просмотр каталога;
-- фильтрация и пагинация товаров;
-- добавление товара в корзину;
-- изменение состава корзины;
-- авторизация пользователя;
+- открытие и работа каталога;
+- фильтрация и пагинация;
+- корзина;
+- authentication;
 - оформление заказа;
-- проверка истории заказов;
-- проверка административной части;
-- smoke-проверки через Postman.
+- история заказов;
+- административная часть;
+- базовые API/smoke checks через Postman.
 
-Такой подход подходит для учебного анализа, но имеет ограничение: если ошибка возникает на сквозном сценарии, сложнее сразу определить, в каком модуле находится причина. Поэтому в отчёте отдельно зафиксированы риски и рекомендации по дальнейшей декомпозиции тестирования.
+Ограничение подхода также зафиксировано: при падении длинного E2E-flow локализовать проблемный компонент сложнее, поэтому в отчёте есть рекомендации по дальнейшей декомпозиции тестирования.
 
 ## Быстрый старт
 
-### 1. Клонировать этот репозиторий
+Клонировать test case:
 
 ```bash
-git clone https://github.com/kindarufy/eshoponweb-integration-testing.git
+git clone https://github.com/nikamurkaa/eshoponweb-integration-testing.git
 cd eshoponweb-integration-testing
 ```
 
-### 2. Клонировать оригинальный eShopOnWeb отдельно
+Оригинальное приложение клонируется отдельно:
 
 ```bash
 git clone https://github.com/dotnet-architecture/eShopOnWeb.git
 ```
 
-Рекомендуемая структура папок рядом друг с другом:
+Рекомендуемая структура:
 
 ```text
 workspace/
@@ -106,103 +95,37 @@ workspace/
 └── eshoponweb-integration-testing/
 ```
 
-### 3. Запустить eShopOnWeb
+Запуск оригинального проекта через Docker выполняется из его репозитория согласно его актуальной документации.
 
-Вариант через Docker из корня оригинального eShopOnWeb:
-
-```bash
-cd eShopOnWeb
-docker compose build
-docker compose up
-```
-
-После запуска Web-приложение обычно доступно на:
-
-```text
-http://localhost:5106
-```
-
-Public API обычно доступен на:
-
-```text
-http://localhost:5200
-```
-
-Альтернативный запуск без Docker описан в `docs/environment.md`.
-
-### 4. Импортировать Postman-коллекцию
-
-В Postman импортировать файлы:
+После запуска импортируйте в Postman:
 
 ```text
 postman/eshoponweb.smoke.postman_collection.json
 postman/eshoponweb.local.postman_environment.json
 ```
 
-По умолчанию в environment используется:
+## Что смотреть работодателю
 
-```text
-webBaseUrl = http://localhost:5106
-```
+1. [`docs/test-plan.md`](docs/test-plan.md) — объём и цели тестирования.
+2. [`docs/test-strategy.md`](docs/test-strategy.md) — выбранный integration approach и ограничения.
+3. [`docs/test-cases.md`](docs/test-cases.md) — ручные сценарии.
+4. [`checklists/e2e-checklist.md`](checklists/e2e-checklist.md) — E2E coverage.
+5. [`reports/findings.md`](reports/findings.md) — обнаруженные проблемы и риски.
+6. [`reports/test-report.md`](reports/test-report.md) — итоговые выводы.
+7. [`docs/security-checklist.md`](docs/security-checklist.md) — security-oriented checks.
 
-### 5. Запустить smoke-проверки
-
-В Postman выбрать environment `eShopOnWeb Local` и запустить коллекцию `eShopOnWeb Smoke Tests`.
-
-Коллекция проверяет базовую доступность ключевых страниц и не заменяет полноценное E2E-тестирование через браузер.
-
-## Тестовые учётные данные
-
-В eShopOnWeb для демо-входа используются:
-
-```text
-User: demouser@microsoft.com
-Admin: admin@microsoft.com
-Password: Pass@word1
-```
-
-Эти данные используются только для локального тестирования demo-приложения.
-
-## Документация
-
-Основные материалы:
-
-- `docs/test-plan.md` — тест-план;
-- `docs/test-strategy.md` — стратегия Big Bang Integration Testing;
-- `docs/test-cases.md` — тест-кейсы;
-- `docs/security-checklist.md` — базовый security-чек-лист;
-- `checklists/e2e-checklist.md` — чек-лист сквозных сценариев;
-- `reports/findings.csv` — реестр findings;
-- `reports/test-report.md` — итоговый отчёт.
-
-## Важное уточнение про findings
-
-Файл `reports/findings.csv` содержит не только подтверждённые баги, а **тестовые находки, риски и сценарии для проверки**.
-
-Это сделано специально: без полного воспроизводимого прогона, скриншотов, логов и точных окружений некорректно называть каждую проблему доказанным дефектом. Поэтому часть записей имеет тип `Risk`, `Observation`, `Coverage Gap` или `Security Test Scenario`.
-
-## Проверка структуры проекта
-
-В репозитории есть скрипт, который проверяет, что основные артефакты на месте, Postman JSON валиден, а CSV с findings имеет нужные колонки.
+## Проверка артефактов
 
 ```bash
 python tools/validate_artifacts.py
 ```
 
-GitHub Actions запускает эту проверку при push и pull request.
+CI workflow также проверяет структуру case study автоматически.
 
-## Что демонстрирует проект
+## Статус
 
-Проект показывает навыки:
+Проект завершён и используется как portfolio case по **integration testing, E2E, API testing, test design и технической документации**.
 
-- анализа внешнего open-source приложения как объекта тестирования;
-- планирования интеграционного тестирования;
-- подготовки тестовой документации;
-- проектирования E2E-сценариев;
-- работы с Postman;
-- оформления реестра findings;
-- описания ограничений тестирования.
+## Автор
 
-## Статус проекта
-
-Проект является учебным портфолио-кейсом по интеграционному тестированию. Исходный код eShopOnWeb не изменялся и не включался в этот репозиторий.
+[Николь Журбенко](https://github.com/nikamurkaa)
