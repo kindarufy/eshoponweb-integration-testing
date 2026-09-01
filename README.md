@@ -1,6 +1,6 @@
 # eShopOnWeb Integration Testing
 
-**eShopOnWeb Integration Testing** — portfolio case по интеграционному и E2E-тестированию open-source приложения **Microsoft eShopOnWeb**.
+**eShopOnWeb Integration Testing** — проект по интеграционному и E2E-тестированию open-source приложения **Microsoft eShopOnWeb**.
 
 Исходный код eShopOnWeb не копируется в этот репозиторий. Здесь находятся только мои тестовые артефакты: стратегия, test plan, test cases, Postman smoke collection, findings, отчёт и вспомогательные инструкции.
 
@@ -16,7 +16,7 @@ https://github.com/dotnet-architecture/eShopOnWeb
 
 ## Мой вклад
 
-В рамках case study подготовлены:
+В рамках проекта подготовлены:
 
 - integration test plan;
 - стратегия Big Bang Integration Testing;
@@ -74,7 +74,7 @@ eshoponweb-integration-testing/
 
 ## Быстрый старт
 
-Клонировать test case:
+Клонировать репозиторий:
 
 ```bash
 git clone https://github.com/nikamurkaa/eshoponweb-integration-testing.git
@@ -104,7 +104,7 @@ postman/eshoponweb.smoke.postman_collection.json
 postman/eshoponweb.local.postman_environment.json
 ```
 
-## Что смотреть работодателю
+## Ключевые артефакты
 
 1. [`docs/test-plan.md`](docs/test-plan.md) — объём и цели тестирования.
 2. [`docs/test-strategy.md`](docs/test-strategy.md) — выбранный integration approach и ограничения.
@@ -120,11 +120,11 @@ postman/eshoponweb.local.postman_environment.json
 python tools/validate_artifacts.py
 ```
 
-CI workflow также проверяет структуру case study автоматически.
+CI workflow также проверяет структуру проекта автоматически.
 
 ## Статус
 
-Проект завершён и используется как portfolio case по **integration testing, E2E, API testing, test design и технической документации**.
+Проект завершён. Основные технические акценты — **integration testing, E2E, API testing, test design и техническая документация**.
 
 ## Автор
 
